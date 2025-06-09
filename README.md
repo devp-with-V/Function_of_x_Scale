@@ -1,1 +1,1 @@
-# F-x-Scale
+# F(x) Scale
