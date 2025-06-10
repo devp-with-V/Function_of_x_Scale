@@ -230,6 +230,18 @@ export default function AboutPage() {
               </p>
             </CardContent>
           </Card>
+            {/* Google Form Button */}
+          <div className="flex justify-center mt-8">
+            <a
+              href="https://forms.gle/yPcVwdPg8AqGL4ik9"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block px-6 py-3 bg-black-600 hover:bg-stone-700 text-white font-mono font-semibold rounded-lg shadow transition-all duration-300"
+            >
+              Fill Out Our Feedback Form
+            </a>
+          </div>
+
         </div>
       </div>
     </div>
