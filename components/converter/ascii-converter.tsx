@@ -1196,7 +1196,7 @@ export default function AsciiConverter() {
             />
           )}
 
-          {/* Floating "Open in v0" button - positioned to not trigger scroll */}
+          {/* Floating "Open in v0" button - positioned to not trigger scroll
           <div className="fixed bottom-4 right-4 z-30 pointer-events-auto">
             <a
               href="https://v0.dev/community/ascii-art-request-0UE1nczWzbu"
@@ -1212,7 +1212,7 @@ export default function AsciiConverter() {
                 className="drop-shadow-md"
               />
             </a>
-          </div>
+          </div> */}
         </div>
 
         {/* Resizable divider - Only visible on desktop after hydration */}
