@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Code, Zap, Palette, Users, Heart, Github } from "lucide-react"
 import Link from "next/link"
@@ -8,6 +8,8 @@ import { usePathname } from "next/navigation"
 
 export default function AboutPage() {
   const pathname = usePathname()
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
 
   useEffect(() => {
     if (typeof document !== "undefined") {
@@ -36,6 +38,7 @@ export default function AboutPage() {
               <span className="relative z-10">F(x) scale</span>
               <div className="absolute inset-0 bg-stone-700/20 rounded-lg blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 -m-2"></div>
             </Link>
+            {/* Desktop Nav */}
             <div className="hidden md:flex space-x-8">
               <Link
                 href="/"
@@ -88,7 +91,77 @@ export default function AboutPage() {
                 Docs
               </Link>
             </div>
+            {/* Hamburger Button for Mobile */}
+            <button
+              className="md:hidden flex flex-col justify-center items-center w-10 h-10 rounded hover:bg-stone-800 transition"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Open menu"
+            >
+              <span className={`block h-0.5 w-6 bg-white mb-1 transition-all ${mobileMenuOpen ? "rotate-45 translate-y-2" : ""}`}></span>
+              <span className={`block h-0.5 w-6 bg-white mb-1 transition-all ${mobileMenuOpen ? "opacity-0" : ""}`}></span>
+              <span className={`block h-0.5 w-6 bg-white transition-all ${mobileMenuOpen ? "-rotate-45 -translate-y-2" : ""}`}></span>
+            </button>
           </div>
+          {/* Mobile Dropdown Menu */}
+          {mobileMenuOpen && (
+            <div className="md:hidden mt-2 bg-stone-900 rounded-lg shadow-lg py-2 px-4">
+              <Link
+                href="/"
+                className={`block py-2 font-mono ${
+                  pathname === "/"
+                    ? "text-white font-bold"
+                    : "text-stone-300 hover:text-white"
+                }`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Home
+              </Link>
+              <Link
+                href="/converter"
+                className={`block py-2 font-mono ${
+                  pathname === "/converter"
+                    ? "text-white font-bold"
+                    : "text-stone-300 hover:text-white"
+                }`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Converter
+              </Link>
+              <Link
+                href="/about"
+                className={`block py-2 font-mono ${
+                  pathname === "/about"
+                    ? "text-white font-bold"
+                    : "text-stone-300 hover:text-white"
+                }`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                About
+              </Link>
+              <Link
+                href="/gallery"
+                className={`block py-2 font-mono ${
+                  pathname === "/gallery"
+                    ? "text-white font-bold"
+                    : "text-stone-300 hover:text-white"
+                }`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Gallery
+              </Link>
+              <Link
+                href="/docs"
+                className={`block py-2 font-mono ${
+                  pathname === "/docs"
+                    ? "text-white font-bold"
+                    : "text-stone-300 hover:text-white"
+                }`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Docs
+              </Link>
+            </div>
+          )}
         </div>
       </nav>
 

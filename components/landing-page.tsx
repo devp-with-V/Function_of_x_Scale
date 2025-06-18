@@ -1172,7 +1172,7 @@
 
 "use client"
 
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Palette, Sparkles } from "lucide-react"
 import Link from "next/link"
@@ -1180,6 +1180,8 @@ import { usePathname } from "next/navigation"
 
 export default function LandingPage() {
   const pathname = usePathname()
+  
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   useEffect(() => {
     // Set document background to black
@@ -1197,6 +1199,83 @@ export default function LandingPage() {
     }
   }, [])
 
+  // return (
+  //   <div className="min-h-screen bg-black text-white">
+  //     {/* Navigation Bar */}
+  //     <nav className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm border-b border-stone-800">
+  //       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  //         <div className="flex justify-between items-center h-16">
+  //           <Link
+  //             href="/"
+  //             className="text-xl font-mono font-bold text-white relative group transition-all duration-300"
+  //           >
+  //             <span className="relative z-10">F(x) scale</span>
+  //             <div className="absolute inset-0 bg-stone-700/20 rounded-lg blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 -m-2"></div>
+  //           </Link>
+  //           <div className="hidden md:flex space-x-8">
+  //             <Link
+  //               href="/"
+  //               className={`font-mono transition-all duration-300 relative ${
+  //                 pathname === "/"
+  //                   ? "text-white shadow-[0_0_10px_rgba(168,162,158,0.5)]"
+  //                   : "text-stone-300 hover:text-white"
+  //               }`}
+  //             >
+  //               Home
+  //             </Link>
+  //             <Link
+  //               href="/converter"
+  //               className={`font-mono transition-all duration-300 relative ${
+  //                 pathname === "/converter"
+  //                   ? "text-white shadow-[0_0_10px_rgba(168,162,158,0.5)]"
+  //                   : "text-stone-300 hover:text-white"
+  //               }`}
+  //             >
+  //               Converter
+  //             </Link>
+  //             <Link
+  //               href="/about"
+  //               className={`font-mono transition-all duration-300 relative ${
+  //                 pathname === "/about"
+  //                   ? "text-white shadow-[0_0_10px_rgba(168,162,158,0.5)]"
+  //                   : "text-stone-300 hover:text-white"
+  //               }`}
+  //             >
+  //               About
+  //             </Link>
+  //             <Link
+  //               href="/gallery"
+  //               className={`font-mono transition-all duration-300 relative ${
+  //                 pathname === "/gallery"
+  //                   ? "text-white shadow-[0_0_10px_rgba(168,162,158,0.5)]"
+  //                   : "text-stone-300 hover:text-white"
+  //               }`}
+  //             >
+  //               Gallery
+  //             </Link>
+  //             <Link
+  //               href="/docs"
+  //               className={`font-mono transition-all duration-300 relative ${
+  //                 pathname === "/docs"
+  //                   ? "text-white shadow-[0_0_10px_rgba(168,162,158,0.5)]"
+  //                   : "text-stone-300 hover:text-white"
+  //               }`}
+  //             >
+  //               Docs
+  //             </Link>
+  //           </div>
+  //           <div className="md:hidden">
+  //             <Button variant="ghost" size="sm" className="text-stone-300 hover:text-white">
+  //               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  //                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+  //               </svg>
+  //             </Button>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </nav>
+
+
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Navigation Bar */}
@@ -1210,6 +1289,7 @@ export default function LandingPage() {
               <span className="relative z-10">F(x) scale</span>
               <div className="absolute inset-0 bg-stone-700/20 rounded-lg blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 -m-2"></div>
             </Link>
+            {/* Desktop Nav */}
             <div className="hidden md:flex space-x-8">
               <Link
                 href="/"
@@ -1262,14 +1342,77 @@ export default function LandingPage() {
                 Docs
               </Link>
             </div>
-            <div className="md:hidden">
-              <Button variant="ghost" size="sm" className="text-stone-300 hover:text-white">
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              </Button>
-            </div>
+            {/* Hamburger Button for Mobile */}
+            <button
+              className="md:hidden flex flex-col justify-center items-center w-10 h-10 rounded hover:bg-stone-800 transition"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Open menu"
+            >
+              <span className={`block h-0.5 w-6 bg-white mb-1 transition-all ${mobileMenuOpen ? "rotate-45 translate-y-2" : ""}`}></span>
+              <span className={`block h-0.5 w-6 bg-white mb-1 transition-all ${mobileMenuOpen ? "opacity-0" : ""}`}></span>
+              <span className={`block h-0.5 w-6 bg-white transition-all ${mobileMenuOpen ? "-rotate-45 -translate-y-2" : ""}`}></span>
+            </button>
           </div>
+          {/* Mobile Dropdown Menu */}
+          {mobileMenuOpen && (
+            <div className="md:hidden mt-2 bg-stone-900 rounded-lg shadow-lg py-2 px-4">
+              <Link
+                href="/"
+                className={`block py-2 font-mono ${
+                  pathname === "/"
+                    ? "text-white font-bold"
+                    : "text-stone-300 hover:text-white"
+                }`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Home
+              </Link>
+              <Link
+                href="/converter"
+                className={`block py-2 font-mono ${
+                  pathname === "/converter"
+                    ? "text-white font-bold"
+                    : "text-stone-300 hover:text-white"
+                }`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Converter
+              </Link>
+              <Link
+                href="/about"
+                className={`block py-2 font-mono ${
+                  pathname === "/about"
+                    ? "text-white font-bold"
+                    : "text-stone-300 hover:text-white"
+                }`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                About
+              </Link>
+              <Link
+                href="/gallery"
+                className={`block py-2 font-mono ${
+                  pathname === "/gallery"
+                    ? "text-white font-bold"
+                    : "text-stone-300 hover:text-white"
+                }`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Gallery
+              </Link>
+              <Link
+                href="/docs"
+                className={`block py-2 font-mono ${
+                  pathname === "/docs"
+                    ? "text-white font-bold"
+                    : "text-stone-300 hover:text-white"
+                }`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Docs
+              </Link>
+            </div>
+          )}
         </div>
       </nav>
 
