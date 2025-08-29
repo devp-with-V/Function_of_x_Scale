@@ -86,7 +86,7 @@ export default function ConverterPage() {
       icon: <FileVector className="h-6 w-6" />,
       href: "/converter/svg-trace",
       category: "vector",
-      status: "stable",
+      status: "beta",
       features: ["Vector tracing", "Path optimization", "SVG export"],
     },
     {
